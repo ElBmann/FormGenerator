@@ -28,11 +28,11 @@ class App extends Component {
       
     ],
     POForms:[
-      {company:'',facility:'',PONumber:'',
-      bol:'', freightcontact:'', sku:'',qty:'',
+      {company:'',facility:'RHNY',PONumber:'',
+      bol:'', freightcontact:'', sku:'',qty: 0,
       pallet:'', arrivaldate:'',totalcontainers:'',
       totalpallets:'',totalcartons:'', ponotes:'',
-      priorityLevel:''    
+      priorityLevel:'1'    
       },
       {company:'',facility:'',PONumber:'',
       bol:'', freightcontact:'', sku:'',qty:'',
@@ -118,6 +118,8 @@ exportCSVHandlerPO =  (event)=>{
 
 //Checks which input filed is being updated. This will also change the state with out mutating it
    if(this.state.rowCounter === 1){
+    console.log('counter',this.state.rowCounter);
+    console.log('Hellow2');
     if(event.target.name === 'company'){
         POFormsCopy[0].company = event.target.value;
       } else if(event.target.name ==='facility'){
@@ -137,7 +139,7 @@ exportCSVHandlerPO =  (event)=>{
       }else if(event.target.name === 'sku'){
         POFormsCopy[0].sku = event.target.value;
       }else if(event.target.name === 'qty'){
-        POFormsCopy[0].sku = event.target.value;
+        POFormsCopy[0].qty = event.target.value;
       }else if(event.target.name === 'pallet'){
         POFormsCopy[0].pallet = event.target.value;
       }else if(event.target.name === 'arrivaldate'){
@@ -151,10 +153,11 @@ exportCSVHandlerPO =  (event)=>{
       }else if(event.target.name === 'ponotes'){
         POFormsCopy[0].ponotes = event.target.value;
       }else if(event.target.name === 'priorityLevel'){
-        POFormsCopy[0].ponotes = event.target.value;
+        POFormsCopy[0].priorityLevel = event.target.value;
 }// end inner if 
 // if add row button is clicked add data to next array element in state
-   }else if(this.state.rowCounter === 2){
+   }if(this.state.rowCounter === 2){
+     console.log('Hellow');
       if(event.target.name === 'company'){
         POFormsCopy[1].company = event.target.value;
       } else if(event.target.name ==='facility'){
@@ -168,7 +171,7 @@ exportCSVHandlerPO =  (event)=>{
       }else if(event.target.name === 'sku'){
         POFormsCopy[1].sku = event.target.value;
       }else if(event.target.name === 'qty'){
-        POFormsCopy[1].sku = event.target.value;
+        POFormsCopy[1].qty = event.target.value;
       }else if(event.target.name === 'pallet'){
         POFormsCopy[1].pallet = event.target.value;
       }else if(event.target.name === 'arrivaldate'){
@@ -182,9 +185,12 @@ exportCSVHandlerPO =  (event)=>{
       }else if(event.target.name === 'ponotes'){
         POFormsCopy[1].ponotes = event.target.value;
       }else if(event.target.name === 'priorityLevel'){
-        POFormsCopy[1].ponotes = event.target.value;
+        
+            POFormsCopy[1].priorityLevel = event.target.value;
+          
+        
   }// end inner if 
-   }//outer if
+   }
 
   this.setState({
     POForms:POFormsCopy
@@ -198,7 +204,7 @@ exportCSVHandlerPO =  (event)=>{
     console.log("In Render: ", this.state)
     let addPOForm2 = null;
     if(this.state.rowCounter === 2){
-      //
+    
       addPOForm2 =
         <Form 
         
@@ -217,17 +223,19 @@ exportCSVHandlerPO =  (event)=>{
           totalPalletsVal = {this.state.totalpallets}
           totalCartonsVal = {this.state.totalcartons}
           PONotesVal = {this.state.ponotes}
-          PriorityLvl = {this.state.priorityLevel}
+          PLevel = {this.state.priorityLevel}
       />;
+    }else{
+      console.log('Balls');
     }
     return (
      <div>
        <p> Rows: {this.state.rowCounter} </p>
         <Form 
           changed={this.exportCSVHandlerPO.bind(this)}
-           invalid
+          invalid
           companyVal ={this.state.company}
-          facilityVal ={this.state.facility}
+          facilityCode ={this.state.facility}
           PONumVal ={this.state.PONumber}
           BolTPONumValrackVal ={this.state.bol}
           freightContVal ={this.state.freightcontact}
@@ -239,7 +247,7 @@ exportCSVHandlerPO =  (event)=>{
           totalPalletsVal = {this.state.totalpallets}
           totalCartonsVal = {this.state.totalcartons}
           PONotesVal = {this.state.ponotes}
-          PriorityLvl = {this.state.priorityLevel}
+          PLevel = {this.state.priorityLevel}
         />
           <div>
             {addPOForm2}

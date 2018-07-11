@@ -15,13 +15,13 @@ return (
           <FormText>Company name as stated in portal </FormText>
          
             <div className = 'inBtwnInput'/>
-           <Label for="exampleSelect">Facility</Label>
-           <Input type="select" name="facility" value = 'facilityVal' id="facilityCode" bsSize="lg" onChange ={props.changed}>
+           <Label for="templateForm">Facility</Label>
+           <Input type="select" name="facility" id="facilityCode" bsSize="lg" onChange ={props.changed}>
             <option>RHNY</option>
             <option>RHNJ</option>
             <option>RHNV</option>
-           
           </Input>
+          
           <FormText>Select your facility</FormText>
 
            <div className = 'inBtwnInput'/>
@@ -80,7 +80,7 @@ return (
 
           <div className = 'inBtwnInput'/>
           <Label for="exampleSelect">Priority Level</Label>
-          <Input type="select" name='priorityLevel'value = {props.PriorityLvl} id="PLevel" bsSize ='lg' onChange ={props.changed}>
+          <Input type="select" name='priorityLevel' id="PLevel" bsSize ='lg' onInput  ={props.changed}>
             <option>1</option>
             
            
