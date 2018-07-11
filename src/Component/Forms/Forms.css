@@ -1,0 +1,20 @@
+.POTempForm{
+    padding: 90px;
+   
+}
+.GenerateBtn{
+    float: left;
+    margin-left: 85px;
+    margin-top: -65px;
+    padding: 15px 32px;
+
+}
+.AddRowBtn{
+    float: left;
+    margin-left: 250px;
+    margin-top: -65px;
+    padding: 15px 32px;
+}
+.inBtwnInput{
+    margin-top: 20px;
+}
