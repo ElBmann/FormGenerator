@@ -95,7 +95,8 @@ class App extends Component {
       priorityLevel:''    
       }
     ],
-      rowCounter:1
+      rowCounter:1,
+      addSKU: 0
     
  
   }
@@ -106,90 +107,64 @@ class App extends Component {
   });
   }
   
-  
-//To Solve issue below https://forum.freecodecamp.org/t/reactjs-using-setstate-to-update-a-single-property-on-an-object/146772
+newSkuHandler = (e) =>{
+
+    //Create a copy of the current Forms State
+    let AddSkuCopy = JSON.parse(JSON.stringify(this.state.addSKU));
+   
+   this.setState({
+      addSKU:AddSkuCopy + 1
+    });
+    //Checks which input filed is being updated. This will also change the state with out mutating it
+   if(this.state.addSKU === 1){
+   
+    console.log('ADDSKU WORKS');
+//TODO: Make sure to add jsx here for both sku and qty field to show
+
+    // this.setState({
+    //   addSKU: isAddSku = false
+    // });
+     // POFormsCopy[0][event.target.name] = event.target.value;
+   }
+
+
+
+
+// if add row button is clicked add data to next array element in state
+  //  }if(this.state.rowCounter === 2){
+  //    console.log('Hellow2');
+  //    POFormsCopy[1][event.target.name] = event.target.value;
+  //  }
+
+  // this.setState({
+  //   POForms:POFormsCopy
+    
+  // });
+}//end exportCSVHandlerPO
+
+
+
+
+
+
+
 exportCSVHandlerPO =  (event)=>{
 
     console.log('counter',this.state.rowCounter);
     console.log('Event.target.value = ',event.target.value);
     //console.log('RowCounter',this.state.AddARow.rowCounter);
     //Create a copy of the current Forms State
-  let POFormsCopy = JSON.parse(JSON.stringify(this.state.POForms));
+   let POFormsCopy = JSON.parse(JSON.stringify(this.state.POForms));
 
 //Checks which input filed is being updated. This will also change the state with out mutating it
    if(this.state.rowCounter === 1){
     console.log('counter',this.state.rowCounter);
-    console.log('Hellow2');
-    if(event.target.name === 'company'){
-        POFormsCopy[0].company = event.target.value;
-      } else if(event.target.name ==='facility'){
-        POFormsCopy[0].facility = event.target.value;
-      }else if(event.target.name ==='PONumber'){
-        //Validation for Po number
-          if(event.target.value.length > 4)
-            POFormsCopy[0].PONumber = event.target.value;
-          else{
-             
-            console.log('Need more Balls');
-          }
-      }else if(event.target.name === 'bol'){
-        POFormsCopy[0].bol = event.target.value;
-      }else if(event.target.name === 'freightcontact'){
-        POFormsCopy[0].freightcontact = event.target.value;
-      }else if(event.target.name === 'sku'){
-        POFormsCopy[0].sku = event.target.value;
-      }else if(event.target.name === 'qty'){
-        POFormsCopy[0].qty = event.target.value;
-      }else if(event.target.name === 'pallet'){
-        POFormsCopy[0].pallet = event.target.value;
-      }else if(event.target.name === 'arrivaldate'){
-        POFormsCopy[0].arrivaldate = event.target.value;
-      }else if(event.target.name === 'totalcontainers'){
-        POFormsCopy[0].totalcontainers = event.target.value;
-      }else if(event.target.name === 'totalpallets'){
-        POFormsCopy[0].totalpallets = event.target.value;
-      }else if(event.target.name === 'totalcartons'){
-        POFormsCopy[0].totalcartons = event.target.value;
-      }else if(event.target.name === 'ponotes'){
-        POFormsCopy[0].ponotes = event.target.value;
-      }else if(event.target.name === 'priorityLevel'){
-        POFormsCopy[0].priorityLevel = event.target.value;
-}// end inner if 
+    console.log('Hellow1');
+      POFormsCopy[0][event.target.name] = event.target.value;
 // if add row button is clicked add data to next array element in state
    }if(this.state.rowCounter === 2){
-     console.log('Hellow');
-      if(event.target.name === 'company'){
-        POFormsCopy[1].company = event.target.value;
-      } else if(event.target.name ==='facility'){
-        POFormsCopy[1].facility = event.target.value;
-      }else if(event.target.name ==='PONumber'){
-        POFormsCopy[1].PONumber = event.target.value;
-      }else if(event.target.name === 'bol'){
-        POFormsCopy[1].bol = event.target.value;
-      }else if(event.target.name === 'freightcontact'){
-        POFormsCopy[1].freightcontact = event.target.value;
-      }else if(event.target.name === 'sku'){
-        POFormsCopy[1].sku = event.target.value;
-      }else if(event.target.name === 'qty'){
-        POFormsCopy[1].qty = event.target.value;
-      }else if(event.target.name === 'pallet'){
-        POFormsCopy[1].pallet = event.target.value;
-      }else if(event.target.name === 'arrivaldate'){
-        POFormsCopy[1].arrivaldate = event.target.value;
-      }else if(event.target.name === 'totalcontainers'){
-        POFormsCopy[1].totalcontainers = event.target.value;
-      }else if(event.target.name === 'totalpallets'){
-        POFormsCopy[1].totalpallets = event.target.value;
-      }else if(event.target.name === 'totalcartons'){
-        POFormsCopy[1].totalcartons = event.target.value;
-      }else if(event.target.name === 'ponotes'){
-        POFormsCopy[1].ponotes = event.target.value;
-      }else if(event.target.name === 'priorityLevel'){
-        
-            POFormsCopy[1].priorityLevel = event.target.value;
-          
-        
-  }// end inner if 
+     console.log('Hellow2');
+     POFormsCopy[1][event.target.name] = event.target.value;
    }
 
   this.setState({
@@ -255,6 +230,7 @@ exportCSVHandlerPO =  (event)=>{
           </div>
        <CSVLink data={this.state.POForms} headers={this.state.headers}> <Button className ='GenerateBtn' >Generate</Button></CSVLink>
        <Button className ='AddRowBtn' onClick ={this.addingRow.bind(this)}> Add Another Row</Button>
+       <Button onClick ={this.newSkuHandler.bind(this)}>BALLS</Button>
       </div>
       
     );
