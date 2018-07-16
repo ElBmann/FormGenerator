@@ -6,6 +6,7 @@ This project was created to help clients with creating their orders, Po Imports,
 <li>No validation- Clients are creating long SKU numbers, adding commas(which disrupts the import process), certain clients dont know how to opreate excel correctly</li>
 <li>Clients create there own fields which causes imports to fail</li>
 <li>Clients lose or misplace excel sheets</li>
+<li>Support team spends 3 hours a day updating and fixing templates</li>
   
 ## This project uses:
 
