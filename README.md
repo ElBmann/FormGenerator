@@ -9,9 +9,9 @@ This project was created to help clients with creating their orders, Po Imports,
   
 ## This project uses:
 
-bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
-React Strap: (https://reactstrap.github.io/)
-react-csv: (https://www.npmjs.com/package/react-csv)
+<li>bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app)</li>
+<li>React Strap: (https://reactstrap.github.io/)</li>
+<li>react-csv: (https://www.npmjs.com/package/react-csv)</li>
 
 
 
