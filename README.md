@@ -1,6 +1,6 @@
 ## FormGenerator
 
-This project was created to help clients with creating their orders, Po Imports, and Itmes for RHF.
+This project was created to help clients with creating their orders, Po Imports, and Itmes for the company web portal.
 
 ### The problem:
 <li>No validation- Clients are creating long SKU numbers, adding commas(which disrupts the import process), certain clients dont know how to opreate excel correctly</li>
