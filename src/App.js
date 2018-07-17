@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button  } from 'reactstrap';
 
 import Form from './Component/Forms/Forms';
+import AddQTYSku from './Component/Forms/AddSkuInputField';
 import {Input} from 'reactstrap';
 import {CSVLink} from 'react-csv';
 import './App.css';
@@ -107,39 +108,31 @@ class App extends Component {
   });
   }
   
+  updateStateSKUQTY =() =>{
+        //Create a copy of the current Forms State
+        let AddSkuCopy = JSON.parse(JSON.stringify(this.state.addSKU));
+  
+        this.setState({
+           addSKU:AddSkuCopy + 1
+         });
+  }
+//TODO: Make sure to add recursion for multiple SKU/QTY, validation, update UI
 newSkuHandler = (e) =>{
-
-    //Create a copy of the current Forms State
-    let AddSkuCopy = JSON.parse(JSON.stringify(this.state.addSKU));
-   
-   this.setState({
-      addSKU:AddSkuCopy + 1
-    });
+  let AddSkuCopy = JSON.parse(JSON.stringify(this.state.addSKU));
+  let POFormsCopy = JSON.parse(JSON.stringify(this.state.POForms));
     //Checks which input filed is being updated. This will also change the state with out mutating it
-   if(this.state.addSKU === 1){
-   
-    console.log('ADDSKU WORKS');
-//TODO: Make sure to add jsx here for both sku and qty field to show
+    if(this.state.addSKU === 1 ){
+      console.log('counter',this.state.rowCounter);
+      console.log('newSkuHandler');
+      POFormsCopy[1][e.target.name] = e.target.value;
+  // if add row button is clicked add data to next array element in state
+     }
 
-    // this.setState({
-    //   addSKU: isAddSku = false
-    // });
-     // POFormsCopy[0][event.target.name] = event.target.value;
-   }
+     this.setState({
+      POForms:POFormsCopy
+      
+    });
 
-
-
-
-// if add row button is clicked add data to next array element in state
-  //  }if(this.state.rowCounter === 2){
-  //    console.log('Hellow2');
-  //    POFormsCopy[1][event.target.name] = event.target.value;
-  //  }
-
-  // this.setState({
-  //   POForms:POFormsCopy
-    
-  // });
 }//end exportCSVHandlerPO
 
 
@@ -157,12 +150,13 @@ exportCSVHandlerPO =  (event)=>{
    let POFormsCopy = JSON.parse(JSON.stringify(this.state.POForms));
 
 //Checks which input filed is being updated. This will also change the state with out mutating it
-   if(this.state.rowCounter === 1){
+   if(this.state.rowCounter === 1 ){
     console.log('counter',this.state.rowCounter);
     console.log('Hellow1');
       POFormsCopy[0][event.target.name] = event.target.value;
 // if add row button is clicked add data to next array element in state
-   }if(this.state.rowCounter === 2){
+   }
+   if(this.state.rowCounter === 2){
      console.log('Hellow2');
      POFormsCopy[1][event.target.name] = event.target.value;
    }
@@ -178,8 +172,21 @@ exportCSVHandlerPO =  (event)=>{
   render() {
     console.log("In Render: ", this.state)
     let addPOForm2 = null;
+    let skuQtyForm = null;
+
+    if(this.state.addSKU >= 1){
+      skuQtyForm = 
+      <AddQTYSku 
+      
+      changed2={this.newSkuHandler.bind(this)}
+      sku2Val={this.state.sku}
+      qty2Val = {this.state.qty}
+      />
+      
+      console.log('ADDSKU WORKS');
+    }
     if(this.state.rowCounter === 2){
-    
+     
       addPOForm2 =
         <Form 
         
@@ -201,7 +208,7 @@ exportCSVHandlerPO =  (event)=>{
           PLevel = {this.state.priorityLevel}
       />;
     }else{
-      console.log('Balls');
+      console.log('Halls');
     }
     return (
      <div>
@@ -226,11 +233,11 @@ exportCSVHandlerPO =  (event)=>{
         />
           <div>
             {addPOForm2}
-
+            {skuQtyForm}
           </div>
        <CSVLink data={this.state.POForms} headers={this.state.headers}> <Button className ='GenerateBtn' >Generate</Button></CSVLink>
        <Button className ='AddRowBtn' onClick ={this.addingRow.bind(this)}> Add Another Row</Button>
-       <Button onClick ={this.newSkuHandler.bind(this)}>BALLS</Button>
+       <Button onClick ={this.updateStateSKUQTY.bind(this)}>Add Sku</Button>
       </div>
       
     );
