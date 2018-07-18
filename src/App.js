@@ -124,8 +124,24 @@ newSkuHandler = (e) =>{
     if(this.state.addSKU === 1 ){
       console.log('counter',this.state.rowCounter);
       console.log('newSkuHandler');
+      
       POFormsCopy[1][e.target.name] = e.target.value;
-  // if add row button is clicked add data to next array element in state
+      //Copy over the state of index 0 and add them to the state of index 1
+      //This allows for the client to add a SKU and it's Qty with out the redundency of adding the other attributes 
+      POFormsCopy[1].company = POFormsCopy[0].company;
+      POFormsCopy[1].facility = POFormsCopy[0].facility; 
+      POFormsCopy[1].PONumber = POFormsCopy[0].PONumber; 
+      POFormsCopy[1].bol = POFormsCopy[0].bol; 
+      POFormsCopy[1].freightcontact = POFormsCopy[0].freightcontact; 
+      POFormsCopy[1].pallet = POFormsCopy[0].pallet; 
+      POFormsCopy[1].arrivaldate = POFormsCopy[0].arrivaldate;
+
+      POFormsCopy[1].totalcontainers = POFormsCopy[0].totalcontainers; 
+      POFormsCopy[1].totalpallets = POFormsCopy[0].totalpallets; 
+      POFormsCopy[1].totalcartons = POFormsCopy[0].totalcartons; 
+      POFormsCopy[1].ponotes = POFormsCopy[0].ponotes; 
+      POFormsCopy[1].priorityLevel = POFormsCopy[0].priorityLevel; 
+      // if add row button is clicked add data to next array element in state
      }
 
      this.setState({
@@ -236,7 +252,7 @@ exportCSVHandlerPO =  (event)=>{
             {skuQtyForm}
           </div>
        <CSVLink data={this.state.POForms} headers={this.state.headers}> <Button className ='GenerateBtn' >Generate</Button></CSVLink>
-       <Button className ='AddRowBtn' onClick ={this.addingRow.bind(this)}> Add Another Row</Button>
+       <Button className ='AddRowBtn' onClick ={this.addingRow.bind(this)}> Add Another PO</Button>
        <Button onClick ={this.updateStateSKUQTY.bind(this)}>Add Sku</Button>
       </div>
       

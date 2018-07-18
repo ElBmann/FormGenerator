@@ -20,6 +20,7 @@ return(
     </FormGroup>
 </Form>
 </div>
-); };
+); 
+};
 
 export default addSkuInputField;
