@@ -117,16 +117,16 @@ class App extends Component {
          });
   }
 //TODO: Make sure to add recursion for multiple SKU/QTY, validation, update UI
+//TODO: Add logic so that if add SKU is using index one on the template. If the add another PO is clicked it knows that index one is occupied. 
 newSkuHandler = (e) =>{
   let AddSkuCopy = JSON.parse(JSON.stringify(this.state.addSKU));
   let POFormsCopy = JSON.parse(JSON.stringify(this.state.POForms));
     //Checks which input filed is being updated. This will also change the state with out mutating it
-    if(this.state.addSKU === 1 ){
+    if(this.state.addSKU === 1 && this.state.rowCounter === 1){
       console.log('counter',this.state.rowCounter);
       console.log('newSkuHandler');
       
       POFormsCopy[1][e.target.name] = e.target.value;
-      //Copy over the state of index 0 and add them to the state of index 1
       //This allows for the client to add a SKU and it's Qty with out the redundency of adding the other attributes 
       POFormsCopy[1].company = POFormsCopy[0].company;
       POFormsCopy[1].facility = POFormsCopy[0].facility; 
