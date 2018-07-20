@@ -121,8 +121,10 @@ class App extends Component {
 newSkuHandler = (e) =>{
   let AddSkuCopy = JSON.parse(JSON.stringify(this.state.addSKU));
   let POFormsCopy = JSON.parse(JSON.stringify(this.state.POForms));
+  let addAnotherSku = this.state.addSKU;
+  let rowCount = this.state.rowCounter;
     //Checks which input filed is being updated. This will also change the state with out mutating it
-    if(this.state.addSKU === 1 && this.state.rowCounter === 1){
+    if(addAnotherSku === 1 && rowCount === 1 ){
       console.log('counter',this.state.rowCounter);
       console.log('newSkuHandler');
       
@@ -141,7 +143,26 @@ newSkuHandler = (e) =>{
       POFormsCopy[1].totalcartons = POFormsCopy[0].totalcartons; 
       POFormsCopy[1].ponotes = POFormsCopy[0].ponotes; 
       POFormsCopy[1].priorityLevel = POFormsCopy[0].priorityLevel; 
+      // If there are 2 orders then add sku btn is clicked this else if is hit
+      //this and the data is pulled from the second order not the first.
+     } else if(addAnotherSku === 1 && rowCount === 2){
+      POFormsCopy[2][e.target.name] = e.target.value;
+      //This allows for the client to add a SKU and it's Qty with out the redundency of adding the other attributes 
+      POFormsCopy[2].company = POFormsCopy[1].company;
+      POFormsCopy[2].facility = POFormsCopy[1].facility; 
+      POFormsCopy[2].PONumber = POFormsCopy[1].PONumber; 
+      POFormsCopy[2].bol = POFormsCopy[1].bol; 
+      POFormsCopy[2].freightcontact = POFormsCopy[1].freightcontact; 
+      POFormsCopy[2].pallet = POFormsCopy[1].pallet; 
+      POFormsCopy[2].arrivaldate = POFormsCopy[1].arrivaldate;
+
+      POFormsCopy[2].totalcontainers = POFormsCopy[1].totalcontainers; 
+      POFormsCopy[2].totalpallets = POFormsCopy[1].totalpallets; 
+      POFormsCopy[2].totalcartons = POFormsCopy[1].totalcartons; 
+      POFormsCopy[2].ponotes = POFormsCopy[1].ponotes; 
+      POFormsCopy[2].priorityLevel = POFormsCopy[1].priorityLevel; 
       // if add row button is clicked add data to next array element in state
+
      }
 
      this.setState({
