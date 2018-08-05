@@ -1,6 +1,6 @@
 ## FormGenerator
 
-This project was created to help clients with creating their orders, Po Imports, and Items for the company web portal.
+This project was created to help clients with creating their orders, PO Imports, and Items for the company web portal.
 
 ### The problem:
 <li>No validation clients are creating long SKU numbers, PONumbers, and Order Numbers</li>
